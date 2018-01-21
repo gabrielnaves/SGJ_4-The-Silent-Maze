@@ -5,13 +5,17 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour {
 
+    public GameObject footprintPrefab;
     public Transform footprintContainer;
+
     public AudioClip[] footstepSounds;
     public AudioSource footstepSource;
+
     public float footstepTime = 0.5f;
 
     float elapsedTime;
     bool move;
+    bool flipFootprint;
     NavMeshAgent agent;
 
     void Awake() {
@@ -22,12 +26,13 @@ public class Enemy : MonoBehaviour {
         CheckNoiseLevel();
         if (move)
             MoveTowardsPlayer();
+        else
+            agent.SetDestination(transform.position);
     }
 
     void CheckNoiseLevel() {
         int noiseLevel = Player.instance.noiseLevel;
-        if (noiseLevel > 0)
-            move = true;
+        move = noiseLevel > 0;
     }
 
     void MoveTowardsPlayer() {
@@ -39,11 +44,22 @@ public class Enemy : MonoBehaviour {
         elapsedTime += Time.fixedDeltaTime;
         if (elapsedTime > footstepTime) {
             PlayFootstepSound();
+            InstantiateFootprint();
             elapsedTime = 0;
         }
     }
 
     void PlayFootstepSound() {
         // TODO
+    }
+
+    void InstantiateFootprint() {
+        GameObject footprint = Instantiate(footprintPrefab);
+        footprint.transform.position = new Vector3(transform.position.x, 0.51f, transform.position.z);
+        footprint.transform.rotation = Quaternion.Euler(90f, 0f, -transform.rotation.eulerAngles.y);
+        footprint.transform.parent = footprintContainer;
+        if (flipFootprint)
+            footprint.GetComponent<SpriteRenderer>().flipX = true;
+        flipFootprint = !flipFootprint;
     }
 }
