@@ -241,9 +241,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'WASD: Move
 
-    Left Ctrl: Move slowly
+    Left Shift: Move slowly
 
-    Left Shift: Run
+    Space: Run
 
 
     Use your mouse to look around'
