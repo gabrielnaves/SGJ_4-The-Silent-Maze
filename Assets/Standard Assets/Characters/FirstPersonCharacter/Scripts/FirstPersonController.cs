@@ -44,6 +44,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool jumping;
         private AudioSource m_AudioSource;
 
+        [HideInInspector, NonSerialized] public int noiseLevel;
+
         void Start() {
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
@@ -55,6 +57,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+            noiseLevel = 0;
         }
 
         void Update() {
@@ -63,6 +66,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 CheckJumpInput();
 
             if (HasLanded()) {
+                noiseLevel = 3;
                 StartCoroutine(m_JumpBob.DoBobCycle());
                 PlayLandingSound();
                 m_MoveDir.y = 0f;
@@ -124,6 +128,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 UpdateCameraPositionWithHeadBob(speed);
 
             m_MouseLook.UpdateCursorLock();
+
+            if (jumping)
+                noiseLevel = 0;
+            else {
+                float magnitude = GetComponent<CharacterController>().velocity.magnitude;
+                Debug.Log(magnitude);
+                if (magnitude < m_SlowWalkSpeed - 0.01f) noiseLevel = 0;
+                else if (magnitude < m_WalkSpeed - 0.01f) noiseLevel = 1;
+                else if (magnitude < m_RunSpeed - 0.01f) noiseLevel = 2;
+                else noiseLevel = 3;
+            }
         }
 
         void GetInput(out float speed) {
