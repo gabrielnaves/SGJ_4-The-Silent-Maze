@@ -155,8 +155,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             bool wasRunning = isRunning;
 
-            isRunning = Input.GetKey(KeyCode.LeftShift);
-            slowWalk = Input.GetKey(KeyCode.LeftControl);
+            isRunning = Input.GetKey(KeyCode.Space);
+            slowWalk = Input.GetKey(KeyCode.LeftShift);
 
             // set the desired speed to be walking or running
             speed = m_WalkSpeed;
