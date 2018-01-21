@@ -12,6 +12,7 @@ public class Overmind : MonoBehaviour {
 
     Vector3 playerStartingPos;
     Quaternion playerStartingRotation;
+    float elapsedTime;
 
     bool gameEnded;
 
@@ -41,9 +42,11 @@ public class Overmind : MonoBehaviour {
 
     void LateUpdate() {
         if (gameEnded) {
-            if (Input.anyKeyDown) {
+            elapsedTime += Time.unscaledDeltaTime;
+            if (Input.anyKeyDown && elapsedTime > 1.5f) {
                 gameEnded = false;
                 Time.timeScale = 1;
+                elapsedTime = 0f;
                 Player.instance.transform.position = playerStartingPos;
                 Player.instance.transform.rotation = playerStartingRotation;
                 loseText.SetActive(false);

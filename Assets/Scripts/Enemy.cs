@@ -84,4 +84,11 @@ public class Enemy : MonoBehaviour {
             Gizmos.DrawWireSphere(transform.position, arcs[i]);
         }
     }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.gameObject == Player.instance.gameObject) {
+            InstantiateFootprint();
+            Overmind.instance.LoseGame();
+        }
+    }
 }

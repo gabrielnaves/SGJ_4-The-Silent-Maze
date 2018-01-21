@@ -1185,7 +1185,6 @@ GameObject:
   - component: {fileID: 691244947}
   - component: {fileID: 691244950}
   - component: {fileID: 691244949}
-  - component: {fileID: 691244948}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1211,22 +1210,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &691244948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 691244946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c817e0804ce292d45903baab5032e79f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textColors:
-  - {r: 0, g: 0.63235295, b: 0.23985818, a: 1}
-  - {r: 0.81487894, g: 0.85294116, b: 0.16306229, a: 1}
-  - {r: 0.8455882, g: 0.47236305, b: 0, a: 1}
-  - {r: 0.8455882, g: 0, b: 0, a: 1}
 --- !u!114 &691244949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1378,7 +1361,6 @@ GameObject:
   - component: {fileID: 1089236108}
   - component: {fileID: 1089236111}
   - component: {fileID: 1089236110}
-  - component: {fileID: 1089236109}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1404,22 +1386,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1089236109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1089236107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c817e0804ce292d45903baab5032e79f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textColors:
-  - {r: 0, g: 0.63235295, b: 0.23985818, a: 1}
-  - {r: 0.81487894, g: 0.85294116, b: 0.16306229, a: 1}
-  - {r: 0.8455882, g: 0.47236305, b: 0, a: 1}
-  - {r: 0.8455882, g: 0, b: 0, a: 1}
 --- !u!114 &1089236110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1772,6 +1738,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1327727678}
   - component: {fileID: 1327727677}
+  - component: {fileID: 1327727676}
+  - component: {fileID: 1327727679}
+  - component: {fileID: 1327727680}
   m_Layer: 0
   m_Name: Exit Light
   m_TagString: Untagged
@@ -1779,6 +1748,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &1327727676
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1327727675}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 6, z: 6.3849807}
+  m_Center: {x: 0, y: -4.3699666e-15, z: 1.3075088}
 --- !u!108 &1327727677
 Light:
   m_ObjectHideFlags: 0
@@ -1828,6 +1809,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!54 &1327727679
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1327727675}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1327727680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1327727675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf5d64b569f8424dab7748e292ca250, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1335672709
 GameObject:
   m_ObjectHideFlags: 0

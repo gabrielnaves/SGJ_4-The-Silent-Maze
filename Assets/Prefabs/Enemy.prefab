@@ -99,6 +99,8 @@ GameObject:
   - component: {fileID: 114270112907688702}
   - component: {fileID: 195451039946921636}
   - component: {fileID: 82737036705110286}
+  - component: {fileID: 136811505318186982}
+  - component: {fileID: 54277825648289544}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -189,6 +191,21 @@ Transform:
   m_Father: {fileID: 4404695014678822}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!54 &54277825648289544
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1906508669409052}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!82 &82737036705110286
 AudioSource:
   m_ObjectHideFlags: 1
@@ -312,6 +329,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 833ffca330d32234cb519936dfadf165, type: 3}
   - {fileID: 8300000, guid: 66a989853be16f84f950e918e11d4de0, type: 3}
   - {fileID: 8300000, guid: d7cd7a867d8c1d949a2fc72e11e8ff00, type: 3}
+--- !u!136 &136811505318186982
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1906508669409052}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &195451039946921636
 NavMeshAgent:
   m_ObjectHideFlags: 1
