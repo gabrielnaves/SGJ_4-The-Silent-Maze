@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class SoundtrackController : MonoBehaviour {
 
+    [Range(0f, 1f)]
+    public float volume;
+
     List<AudioSource> chords = new List<AudioSource>();
     List<AudioSource> playedChords = new List<AudioSource>();
 
     void Awake() {
-        foreach (Transform child in transform)
+        foreach (Transform child in transform) {
             chords.Add(child.GetComponent<AudioSource>());
+            child.GetComponent<AudioSource>().volume = volume;
+        }
     }
 
     void Start() {

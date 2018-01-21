@@ -29,6 +29,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+        [SerializeField] private GameObject footprintPrefab;
+        [SerializeField] private Transform footprintContainer;
 
         private Camera m_Camera;
         private bool requestedJump;
@@ -43,6 +45,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool jumping;
         private AudioSource m_AudioSource;
+        private bool flipFootprint;
 
         [HideInInspector, NonSerialized] public int noiseLevel;
 
@@ -58,6 +61,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
             noiseLevel = 0;
+            flipFootprint = false;
         }
 
         void Update() {
@@ -133,7 +137,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 noiseLevel = 0;
             else {
                 float magnitude = GetComponent<CharacterController>().velocity.magnitude;
-                Debug.Log(magnitude);
                 if (magnitude < m_SlowWalkSpeed - 0.01f) noiseLevel = 0;
                 else if (magnitude < m_WalkSpeed - 0.01f) noiseLevel = 1;
                 else if (magnitude < m_RunSpeed - 0.01f) noiseLevel = 2;
@@ -202,6 +205,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // move picked sound to index 0 so it's not picked next time
             m_FootstepSounds[n] = m_FootstepSounds[0];
             m_FootstepSounds[0] = m_AudioSource.clip;
+            MakeFootprint();
+        }
+
+        void MakeFootprint() {
+            GameObject footprint = Instantiate(footprintPrefab);
+            footprint.transform.position = new Vector3(transform.position.x, 0.51f, transform.position.z);
+            footprint.transform.rotation = Quaternion.Euler(90f, 0f, -transform.rotation.eulerAngles.y);
+            footprint.transform.parent = footprintContainer;
+            if (flipFootprint)
+                footprint.GetComponent<SpriteRenderer>().flipX = true;
+            flipFootprint = !flipFootprint;
         }
 
         void UpdateCameraPositionWithHeadBob(float speed) {
