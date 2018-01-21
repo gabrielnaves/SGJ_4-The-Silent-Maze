@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuOvermind : MonoBehaviour {
 
     void Update() {
-        if (Input.anyKeyDown)
+        if (Input.anyKeyDown && !Input.GetKey(KeyCode.Escape))
             SceneManager.LoadScene("level");
     }
 }

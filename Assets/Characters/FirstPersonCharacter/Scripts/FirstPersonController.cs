@@ -65,6 +65,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
         void Update() {
+            if (Overmind.instance.gamePaused)
+                return;
             RotateView();
             if (!requestedJump)
                 CheckJumpInput();
@@ -98,6 +100,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
         void FixedUpdate() {
+            if (Overmind.instance.gamePaused)
+                return;
             float speed;
             GetInput(out speed);
             // always move along the camera forward as it is the direction that it being aimed at

@@ -9,6 +9,8 @@ public class Overmind : MonoBehaviour {
 
     public GameObject loseText;
     public GameObject winText;
+    public GameObject pausedText;
+    public DrumEnemy drumEnemy;
 
     Vector3 playerStartingPos;
     Quaternion playerStartingRotation;
@@ -18,6 +20,7 @@ public class Overmind : MonoBehaviour {
 
     void Awake() {
         instance = this;
+        gamePaused = false;
     }
 
     void Start() {
@@ -41,11 +44,12 @@ public class Overmind : MonoBehaviour {
     }
 
     void LateUpdate() {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            SceneManager.LoadScene("menu");
-        if (gameEnded) {
+        if (Input.GetKeyDown(KeyCode.P) && !gameEnded) {
+            TogglePause();
+        }
+        else if (gameEnded) {
             elapsedTime += Time.unscaledDeltaTime;
-            if (Input.anyKeyDown && elapsedTime > 1.5f) {
+            if (Input.anyKeyDown && !Input.GetKey(KeyCode.Escape) && elapsedTime > 1.5f) {
                 gameEnded = false;
                 Time.timeScale = 1;
                 elapsedTime = 0f;
@@ -53,7 +57,15 @@ public class Overmind : MonoBehaviour {
                 Player.instance.transform.rotation = playerStartingRotation;
                 loseText.SetActive(false);
                 winText.SetActive(false);
+                drumEnemy.Start();
             }
         }
+    }
+
+    public bool gamePaused { get; private set; }
+    void TogglePause() {
+        gamePaused = !gamePaused;
+        Time.timeScale = gamePaused ? 0f : 1f;
+        pausedText.SetActive(gamePaused);
     }
 }
