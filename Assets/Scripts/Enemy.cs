@@ -5,29 +5,31 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour {
 
+    public Transform startingPos;
+
     public GameObject footprintPrefab;
     public Transform footprintContainer;
 
-    public AudioClip[] footstepSounds;
-    public AudioSource footstepSource;
-
     public float footstepTime = 0.5f;
 
-    float elapsedTime;
+    public float[] speeds;
+    public AudioClip[] regularSounds;
+
+    NavMeshAgent agent;
+    AudioSource source;
     bool move;
     bool flipFootprint;
-    NavMeshAgent agent;
+    float elapsedTime;
 
     void Awake() {
         agent = GetComponent<NavMeshAgent>();
+        source = GetComponent<AudioSource>();
     }
 
     void FixedUpdate() {
         CheckNoiseLevel();
-        if (move)
-            MoveTowardsPlayer();
-        else
-            agent.SetDestination(transform.position);
+        Move();
+        UpdateSound();
     }
 
     void CheckNoiseLevel() {
@@ -35,22 +37,24 @@ public class Enemy : MonoBehaviour {
         move = noiseLevel > 0;
     }
 
-    void MoveTowardsPlayer() {
-        agent.SetDestination(Player.instance.transform.position);
+    void Move() {
+        if (move) {
+            agent.SetDestination(Player.instance.transform.position);
+            agent.speed = speeds[Player.instance.noiseLevel];
+        }
+        else {
+            agent.SetDestination(startingPos.position);
+            agent.speed = speeds[1];
+        }
         UpdateFootsteps();
     }
 
     void UpdateFootsteps() {
         elapsedTime += Time.fixedDeltaTime;
         if (elapsedTime > footstepTime) {
-            PlayFootstepSound();
             InstantiateFootprint();
             elapsedTime = 0;
         }
-    }
-
-    void PlayFootstepSound() {
-        // TODO
     }
 
     void InstantiateFootprint() {
@@ -61,5 +65,12 @@ public class Enemy : MonoBehaviour {
         if (flipFootprint)
             footprint.GetComponent<SpriteRenderer>().flipX = true;
         flipFootprint = !flipFootprint;
+    }
+
+    void UpdateSound() {
+        if (!source.isPlaying) {
+            source.clip = regularSounds[Random.Range(0, regularSounds.Length)];
+            source.Play();
+        }
     }
 }
