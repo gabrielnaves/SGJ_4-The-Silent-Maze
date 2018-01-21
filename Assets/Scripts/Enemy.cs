@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour {
 
     public float footstepTime = 0.5f;
 
+    public float[] arcs = new float[0];
+    public Color[] colors = new Color[0];
     public float[] speeds;
     public AudioClip[] regularSounds;
 
@@ -34,7 +36,9 @@ public class Enemy : MonoBehaviour {
 
     void CheckNoiseLevel() {
         int noiseLevel = Player.instance.noiseLevel;
-        move = noiseLevel > 0;
+        if (noiseLevel > 0)
+            move = Vector3.Distance(Player.instance.transform.position, transform.position) < arcs[noiseLevel];
+        else move = false;
     }
 
     void Move() {
@@ -71,6 +75,13 @@ public class Enemy : MonoBehaviour {
         if (!source.isPlaying) {
             source.clip = regularSounds[Random.Range(0, regularSounds.Length)];
             source.Play();
+        }
+    }
+
+    void OnDrawGizmosSelected() {
+        for (int i = 0; i < arcs.Length; ++i) {
+            Gizmos.color = colors[i];
+            Gizmos.DrawWireSphere(transform.position, arcs[i]);
         }
     }
 }

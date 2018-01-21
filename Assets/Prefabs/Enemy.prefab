@@ -153,7 +153,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1196815902028172}
-  m_LocalRotation: {x: 0, y: -0.92387956, z: 0, w: 0.38268343}
+  m_LocalRotation: {x: -0, y: -0.92387956, z: -0, w: 0.38268343}
   m_LocalPosition: {x: 43, y: 1, z: -13.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -219,16 +219,16 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0.0851593
+      time: 0.17307281
       value: 1.1
       inSlope: -4.0016
       outSlope: -4.0016
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.32785034
-      value: 0.37597656
-      inSlope: -1.5475603
-      outSlope: -1.5475603
+      time: 0.64653015
+      value: 0.14411926
+      inSlope: -1.1097506
+      outSlope: -1.1097506
       tangentMode: 0
     - serializedVersion: 2
       time: 1
@@ -291,11 +291,21 @@ MonoBehaviour:
     type: 2}
   footprintContainer: {fileID: 4771785450588164}
   footstepTime: 0.5
+  arcs:
+  - 0
+  - 5
+  - 10
+  - 20
+  colors:
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 0, g: 0.32616636, b: 0.7058823, a: 1}
+  - {r: 0.86764705, g: 0.48468554, b: 0, a: 1}
+  - {r: 0.6911765, g: 0, b: 0, a: 1}
   speeds:
   - 0
-  - 3.5
-  - 6
-  - 10
+  - 4
+  - 7
+  - 12
   regularSounds:
   - {fileID: 8300000, guid: 91d6cb809cb72f24da8ade93f04f0489, type: 3}
   - {fileID: 8300000, guid: 4eb7a27131714db44a7c94750b52052e, type: 3}
@@ -312,7 +322,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.6
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0

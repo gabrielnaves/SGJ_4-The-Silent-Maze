@@ -84,7 +84,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
         bool CheckJumpInput() {
-            return requestedJump = CrossPlatformInputManager.GetButtonDown("Jump");
+            return false;
         }
 
         bool HasLanded() {
