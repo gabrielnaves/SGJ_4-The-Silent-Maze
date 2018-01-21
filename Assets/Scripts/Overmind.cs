@@ -41,6 +41,8 @@ public class Overmind : MonoBehaviour {
     }
 
     void LateUpdate() {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene("menu");
         if (gameEnded) {
             elapsedTime += Time.unscaledDeltaTime;
             if (Input.anyKeyDown && elapsedTime > 1.5f) {
